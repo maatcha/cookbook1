@@ -13,8 +13,9 @@ class Controller
 	end
 
 	def create
+		name = @view.ask_user_for_name
 		description = @view.ask_user_for_description
-		recipe = recipe.new
+		recipe = Recipe.new(name, description)
 		@cookbook.add_recipe(recipe)
 	end
 

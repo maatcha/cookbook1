@@ -1,14 +1,19 @@
 class View
-	
+
 	def display(recipes)
-		recipes.each_with_index do |index|
+		recipes.each_with_index do |recipe, index|
 			puts "#{index + 1} - #{recipe.description}"
 		end
 	end	
 
+	def ask_user_for_name
+		puts "Which name for your recipe ?"
+		gets.chomp
+	end
+
 	def ask_user_for_description
-		puts "What d'you wanna do ?"
-		gets.chomp	
+		puts "What's the description of that recipe ?"
+		gets.chomp
 	end
 
 	def ask_user_for_index

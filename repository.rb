@@ -1,21 +1,23 @@
 require "csv"
 
-class Cookbook
+class Repository
 	
 	def initialize
 		@recipes = []
 	end
 
 	def all
-		@recipes
-
+		filepath = "data.csv"
+		csv_options = { col_sep: ", ", force_quotes: false, quote_char: '"', headers: :first_row }
+		CSV.foreach(filepath, csv_options) do |row|
+			puts "#{row["Name"]} : #{row["Description"]}"
+		end
 	end
 
 	def add_recipe(recipe)
-			@recipes << recipe
-			csv_options = { col_sep: ",", force_quotes: true, quote_char: "'" }
-			CSV.open("data.csv", "w") do |csv|
-			csv << @recipes
+			csv_options = { col_sep: " : ", force_quotes: false, quote_char: '"', headers: :first_row }
+			CSV.open("data.csv", "ab", csv_options) do |csv|
+			csv << [recipe.name, recipe.description]
 			end
 	end
 

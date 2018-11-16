@@ -2,7 +2,8 @@ require_relative "repository"
 require_relative "controller"
 require_relative "router"
 
-repository = Cookbook.new
+repository = Repository.new
 controller = Controller.new(repository)
 router = Router.new(controller)
+router.csv_initialize
 router.run

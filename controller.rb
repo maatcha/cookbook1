@@ -3,8 +3,8 @@ require_relative "view"
 
 class Controller
 	
-	def initialize(cookbook)
-	@cookbook = cookbook
+	def initialize(repository)
+	@repository = repository
 	@view = View.new
 	end
 
@@ -16,19 +16,19 @@ class Controller
 		name = @view.ask_user_for_name
 		description = @view.ask_user_for_description
 		recipe = Recipe.new(name, description)
-		@cookbook.add_recipe(recipe)
+		@repository.add_recipe(recipe)
 	end
 
 	def destroy
 		display_recipes
 		index = @view.ask_user_for_index
-		@cookbook.remove(index)
+		@repository.remove(index)
 	end
 
 	private
 
 	def display_recipes
-		recipes = @cookbook.all
+		recipes = @repository.all
 		@view.display(recipes)
 	end
 end

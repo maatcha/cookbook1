@@ -1,14 +1,22 @@
 class Router
+	
 	def initialize(controller)
 		@controller = controller
 	end
 
 	def run
-		loop  do
+		loop do
 			print_actions
 			action = gets.chomp.to_i
 			dispatch(action)
 		end
+	end
+
+	def csv_initialize
+		csv_options = { col_sep: ", ", force_quotes: false, quote_char: '"', headers: :first_row }
+			CSV.open("data.csv", "ab", csv_options) do |csv|
+			csv << ["Name", "Description"]
+			end
 	end
 
 	private

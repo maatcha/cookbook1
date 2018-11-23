@@ -5,5 +5,4 @@ require_relative "router"
 repository = Repository.new
 controller = Controller.new(repository)
 router = Router.new(controller)
-router.csv_initialize
 router.run

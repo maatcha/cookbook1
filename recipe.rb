@@ -6,4 +6,5 @@ class Recipe
 		@name = name
 		@description = description
 	end
+	
 end

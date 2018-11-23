@@ -22,13 +22,12 @@ class Controller
 	def destroy
 		display_recipes
 		index = @view.ask_user_for_index
-		@repository.remove(index)
+		@repository.remove_recipe(index)
 	end
 
 	private
 
 	def display_recipes
-		recipes = @repository.all
-		@view.display(recipes)
+		@view.display
 	end
 end

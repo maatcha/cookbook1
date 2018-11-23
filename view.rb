@@ -1,11 +1,14 @@
 class View
-
-	def display(recipes)
-		puts "----NAME----------DESCRIPTION---------------------------------------------------"
-		recipes.each_with_index do |recipe, index|
-			puts "#{index + 1} - #{recipe[0]}"
-		end
+	
+	def display
+		puts "INDEX--NAME : DESCRIPTION-----------------------------------------------"
+		csv_options = { col_sep: ",", force_quotes: false, headers: :first_row, quote_char: "|" }
+			CSV.foreach("data.csv", csv_options) do |row|
+				puts "#{row["index"]} : #{row["name"]} ; #{row["description"]}"
+				puts "---------------------------------------------------------------------"
+			end
 	end	
+
 
 	def ask_user_for_name
 		puts "Which name for your recipe ?"
@@ -19,6 +22,6 @@ class View
 
 	def ask_user_for_index
 		puts "Index?"
-		gets.chomp.to_i - 1
+		gets.chomp.to_i
 	end
 end

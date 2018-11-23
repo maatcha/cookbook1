@@ -13,10 +13,6 @@ class Router
 	end
 
 	def csv_initialize
-		csv_options = { col_sep: ", ", force_quotes: false, quote_char: '"', headers: :first_row }
-			CSV.open("data.csv", "ab", csv_options) do |csv|
-			csv << ["Name", "Description"]
-			end
 	end
 
 	private

@@ -10,22 +10,21 @@ class Repository
 	end
 
 	def add_recipe(recipe)
-		
 
-		@recipe_index +=1
-		csv_init = CSV.read(@csv_file)
+		table = CSV.table(@csv_file, @csv_options)
+		table_by_col = table.class.new(table).by_col!
+		@recipe_index = table_by_col[0].last.to_i + 1
 
 		CSV.open(@csv_file, "a+", @csv_options) do |csv|
-			if csv_init.empty?
+			if CSV.read(@csv_file).empty?
 				csv << ["index", "name", "description"]
 			end
 
 			csv << [@recipe_index, recipe.name, recipe.description]
-			end
+		end
 	end
 
 	def remove_recipe(index)
-		
 		table = CSV.table(@csv_file, @csv_options)
 		
 		table.delete_if do |row|
@@ -35,15 +34,5 @@ class Repository
 		File.open(@csv_file, "w", @csv_options) do |f|
 			f.write(table.to_csv)
 		end
-
-	# 	table.each do |row|
-	# 		until row[0].is_a? Integer
-	# 			row[0].capitalize
-	# 			row[1].capitalize
-	# 			row[2].capitalize
-	# 		end
-	# 	p row[0..2]
-	# end
-
 	end
 end 
